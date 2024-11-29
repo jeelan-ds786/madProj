@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search</h1>
+        <form method="GET" action="{{ url_for('admin_search_results') }}">
+            <label for="search_by">Search By:</label>
+            <select id="search_by" name="search_by">
+                <option value="service">Service</option>
+                <option value="customer">Customer</option>
+                <option value="professional">Professional</option>
+            </select>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="all">All</option>
+                <option value="requested">Requested</option>
+                <option value="accepted">Accepted</option>
+                <option value="closed">Closed</option>
+            </select>
+
+            <input type="text" id="search_text" name="search_text" placeholder="Enter search text">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>

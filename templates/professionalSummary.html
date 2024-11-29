@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Professional Summary</h1>
+        <canvas id="serviceChart" width="400" height="200"></canvas>
+        <script>
+            const ctx = document.getElementById('serviceChart').getContext('2d');
+            const serviceChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Closed', 'Rejected', 'Received'],
+                    datasets: [{
+                        data: {{ summary_data|tojson }},
+                        backgroundColor: ['#4caf50', '#f44336', '#2196f3']
+                    }]
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Services</h1>
+        <form method="GET" action="{{ url_for('professional_search_results') }}">
+            <label for="search_by">Search By:</label>
+            <select id="search_by" name="search_by">
+                <option value="date">Date</option>
+                <option value="pincode">Pincode</option>
+            </select>
+
+            <label for="search_text">Search Text:</label>
+            <input type="text" id="search_text" name="search_text" placeholder="Enter search text">
+
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>Filtered Results</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Contact</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+            {% for result in search_results %}
+            <tr>
+                <td>{{ result.id }}</td>
+                <td>{{ result.customer.fullname }}</td>
+                <td>{{ result.customer.contact }}</td>
+                <td>{{ result.customer.address }}</td>
+                <td>{{ result.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

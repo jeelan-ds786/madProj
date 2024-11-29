@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Available Services</h1>
+        <div class="services">
+            {% for service in services %}
+            <button onclick="filterService({{ service.id }})">{{ service.name }}</button>
+            {% endfor %}
+        </div>
+
+        <h2>Filtered Professionals</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Professional Name</th>
+                <th>Contact</th>
+                <th>Experience</th>
+                <th>Action</th>
+            </tr>
+            {% for professional in filtered_professionals %}
+            <tr>
+                <td>{{ professional.id }}</td>
+                <td>{{ professional.fullname }}</td>
+                <td>{{ professional.contact }}</td>
+                <td>{{ professional.experience_years }}</td>
+                <td><a href="{{ url_for('request_service', professional_id=professional.id) }}">Request Service</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Service History</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Service Name</th>
+                <th>Professional Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for history in service_history %}
+            <tr>
+                <td>{{ history.id }}</td>
+                <td>{{ history.service.name }}</td>
+                <td>{{ history.professional.fullname }}</td>
+                <td>{{ history.status }}</td>
+                <td>
+                    {% if history.status == 'requested' %}
+                    <a href="{{ url_for('close_service', id=history.id) }}">Close It</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

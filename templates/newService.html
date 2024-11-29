@@ -1,0 +1,19 @@
+@app.route('/admin/service/new', methods=['GET', 'POST'])
+@login_required
+def new_service():
+    if current_user.role != ROLE_ADMIN:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        base_price = request.form['base_price']
+
+        new_service = Service(name=name, description=description, base_price=base_price)
+        db.session.add(new_service)
+        db.session.commit()
+
+        flash('Service added successfully!', 'success')
+        return redirect(url_for('admin_dashboard'))
+
+    return render_template('newService.html')

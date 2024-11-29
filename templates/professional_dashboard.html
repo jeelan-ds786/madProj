@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Service Professional Dashboard</h2>
+    <p>Welcome to your dashboard. You can view your assigned service requests here.</p>
+
+    <a href="{{ url_for('main.view_requests') }}" class="btn btn-info">View Service Requests</a>
+{% endblock %}

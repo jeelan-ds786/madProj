@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Signup</h1>
+        <form method="POST" action="{{ url_for('customer_signup') }}">
+            {{ form.hidden_tag() }}  <!-- CSRF Token -->
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ form.email.data }}" required>
+            {% if form.email.errors %}
+                <ul>
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            {% if form.password.errors %}
+                <ul>
+                    {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" value="{{ form.fullName.data }}" required>
+            {% if form.fullName.errors %}
+                <ul>
+                    {% for error in form.fullName.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ form.address.data }}" required>
+            {% if form.address.errors %}
+                <ul>
+                    {% for error in form.address.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" name="pincode" value="{{ form.pincode.data }}" required>
+            {% if form.pincode.errors %}
+                <ul>
+                    {% for error in form.pincode.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button type="submit">Signup</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</body>
+</html>
